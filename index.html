@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIWAWIST - تحميل الملفات</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        header {
+            background: #333;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            background: #444;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .file-list a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .upload-btn {
+            background: #00ff00;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>TIWAWIST - تحميل الملفات</header>
+    
+    <div class="container">
+        <h2>الملفات المتاحة للتحميل</h2>
+        <ul class="file-list" id="fileList">
+            <li><a href="#">مثال ملف 1.zip</a></li>
+            <li><a href="#">مثال ملف 2.rar</a></li>
+        </ul>
+        <input type="file" id="fileInput">
+        <button class="upload-btn" onclick="uploadFile()">رفع ملف</button>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 TIWAWIST - جميع الحقوق محفوظة</p>
+    </footer>
+    
+    <script>
+        function uploadFile() {
+            let fileInput = document.getElementById("fileInput");
+            let fileList = document.getElementById("fileList");
+            if (fileInput.files.length > 0) {
+                let fileName = fileInput.files[0].name;
+                let li = document.createElement("li");
+                li.innerHTML = `<a href="#">${fileName}</a>`;
+                fileList.appendChild(li);
+            } else {
+                alert("الرجاء اختيار ملف لرفعه.");
+            }
+        }
+
+        // إرسال إشعار عند دخول زائر
+        document.addEventListener("DOMContentLoaded", function() {
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+            
+            if (Notification.permission === "granted") {
+                new Notification("🚀 إشعار جديد!", {
+                    body: "قام شخص جديد بزيارة موقعك.",
+                    icon: "https://cdn-icons-png.flaticon.com/512/609/609803.png"
+                });
+            }
+        });
+    </script>
+</body>
+</html>
